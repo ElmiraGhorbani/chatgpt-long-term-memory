@@ -2,7 +2,7 @@
 
 The Chatgpt Long Term Memory package is designed to empower your projects by accommodating a large number of simultaneous users while leveraging an extensive knowledge base and adaptive memory. This capability is made possible through the integration of cutting-edge technologies, including GPT(OpenAI), llama vector index, and Redis datastore.
 
-## kEY Features:
+## KEY Features:
 
 - Scalability to handle numerous concurrent users
 - Access to an expansive knowledge base
