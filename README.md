@@ -4,14 +4,15 @@ The Chatgpt Long Term Memory package is designed to empower your projects by acc
 
 ## Key Features:
 
-    Scalability to handle numerous concurrent users
-    Access to an expansive knowledge base
-    Adaptive memory for improved performance
-    Powered by state-of-the-art technologies like GPT, llama vector index, and Redis datastore
+- Scalability to handle numerous concurrent users
+- Access to an expansive knowledge base
+- Adaptive memory for improved performance
+- Powered by state-of-the-art technologies like GPT, llama vector index, and Redis datastore
 
 # Getting Started:
 
 To utilize the Chatgpt Long Term Memory package in your projects, follow the steps below:
+
     1. Install the package
     ```
     pip install chatgpt_long_term_memory
