@@ -153,3 +153,6 @@ dmypy.json
 cython_debug/
 
 .vscode
+*.json
+storages/
+resources

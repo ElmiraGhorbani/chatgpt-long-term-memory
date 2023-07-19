@@ -2,6 +2,8 @@ from datetime import datetime
 
 from redis_chatgpt.manager import RedisManager
 
+from chatgpt_long_term_memory.memory.config import ChatMemoryConfig
+
 
 class ChatMemory:
     """
@@ -13,8 +15,9 @@ class ChatMemory:
 
     """
 
-    def __init__(self, redis_host: str = "172.16.0.2", redis_port: int = 6379):
-        self.redis_db = RedisManager(host=redis_host, port=redis_port)
+    def __init__(self, config: ChatMemoryConfig):
+        self.redis_db = RedisManager(
+            host=config.redis_host, port=config.redis_port)
 
     def get(self, user_id):
         """

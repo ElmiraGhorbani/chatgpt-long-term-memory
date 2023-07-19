@@ -1,12 +1,22 @@
 # Import necessary classes from modules
-from chatgpt_long_term_memory.llama_index_helpers.index_engine import DocIndexer
-from chatgpt_long_term_memory.llama_index_helpers.retrievers_engine import Retrievers
+from chatgpt_long_term_memory.llama_index_helpers.config import (
+    IndexConfig, RetrieversConfig)
+from chatgpt_long_term_memory.llama_index_helpers.index_engine import \
+    DocIndexer
+from chatgpt_long_term_memory.llama_index_helpers.retrievers_engine import \
+    Retrievers
 from chatgpt_long_term_memory.memory.chat_memory import ChatMemory
+from chatgpt_long_term_memory.memory.config import ChatMemoryConfig
 
 
 class ChatGPTClient(DocIndexer, Retrievers, ChatMemory):
-    def __init__(self):
-        super().__init__()
+    def __init__(self,
+                 doc_indexer_config: IndexConfig,
+                 chat_memory_config: ChatMemoryConfig,
+                 retrievers_config: RetrieversConfig):
+        DocIndexer.__init__(self, config=doc_indexer_config)
+        Retrievers.__init__(self, config=chat_memory_config)
+        ChatMemory.__init__(self, config=retrievers_config)
 
     def converse_callback(self, question: str, user_id: str, callback=None):
         """

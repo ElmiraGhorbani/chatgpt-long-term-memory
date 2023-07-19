@@ -8,10 +8,14 @@ from llama_index import (Document, PromptHelper, ServiceContext,
                          set_global_service_context)
 from llama_index.llms import OpenAI
 
-# Set the OpenAI API key using the environment variable or a default key
-kEY = os.getenv("OPENAI_API_KEY", "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")
-openai.api_key = kEY
-os.environ["OPENAI_API_KEY"] = kEY
+from chatgpt_long_term_memory.llama_index_helpers.config import IndexConfig
+
+# Set the OpenAI API kEY using the environment variable or a default kEY
+KEY = os.getenv("OPENAI_API_KEY",
+                "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")
+openai.api_key = KEY
+os.environ["OPENAI_API_KEY"] = KEY
+
 
 class DocIndexer:
     """
@@ -30,28 +34,26 @@ class DocIndexer:
     """
 
     def __init__(
-        self, root_path: str = "", knowledge_base: bool = True, model_name: str = "gpt-3.5-turbo", temperature: int = 0,
-            context_window: int = 4096, num_outputs: int = 700,
-            max_chunk_overlap: float = 0.5, chunk_size_limit: int = 600):
-
-        self.knowledge_base = knowledge_base
+            self, config: IndexConfig):
+        self.knowledge_base = config.knowledge_base
 
         # Initialize the OpenAI language model
-        self.llm = OpenAI(model=model_name, temperature=temperature)
+        self.llm = OpenAI(model=config.model_name,
+                          temperature=config.temperature)
         service_context = ServiceContext.from_defaults(llm=self.llm)
         set_global_service_context(service_context)
 
-        self.root_path = root_path
+        self.root_path = config.root_path
         self.data_path = f'{self.root_path}/resources/data'
         assert os.path.exists(
             self.data_path), f"Path '{self.data_path}' does not exist!"
 
         # Define prompt helper for the index
         self.prompt_helper = PromptHelper(
-            context_window,
-            num_outputs,
-            max_chunk_overlap,
-            chunk_size_limit=chunk_size_limit
+            config.context_window,
+            config.num_outputs,
+            config.max_chunk_overlap,
+            chunk_size_limit=config.chunk_size_limit
         )
 
     def load_documents(self, retrieved_documents):

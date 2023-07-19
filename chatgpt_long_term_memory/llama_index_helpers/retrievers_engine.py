@@ -5,11 +5,15 @@ from llama_index.indices.postprocessor import SimilarityPostprocessor
 from llama_index.query_engine import RetrieverQueryEngine
 from llama_index.retrievers import VectorIndexRetriever
 
-kEY = os.getenv("OPENAI_API_KEY",
+from chatgpt_long_term_memory.llama_index_helpers.config import \
+    RetrieversConfig
+
+KEY = os.getenv("OPENAI_API_KEY",
                 "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")
 
-openai.api_key = kEY
-os.environ["OPENAI_API_KEY"] = kEY
+openai.api_kEY = KEY
+os.environ["OPENAI_API_KEY"] = KEY
+
 
 class Retrievers:
     """
@@ -21,9 +25,9 @@ class Retrievers:
 
     """
 
-    def __init__(self, top_k: int = 3, similarity_threshold: float = 0.7):
-        self.top_k = top_k
-        self.similarity_threshold = similarity_threshold
+    def __init__(self, config: RetrieversConfig):
+        self.top_k = config.top_k
+        self.similarity_threshold = config.similarity_threshold
 
     def query(self, index, question):
         """
