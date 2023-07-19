@@ -2,7 +2,7 @@
 
 The Chatgpt Long Term Memory package is designed to empower your projects by accommodating a large number of simultaneous users while leveraging an extensive knowledge base and adaptive memory. This capability is made possible through the integration of cutting-edge technologies, including GPT(OpenAI), llama vector index, and Redis datastore.
 
-## Key Features:
+## kEY Features:
 
 - Scalability to handle numerous concurrent users
 - Access to an expansive knowledge base
@@ -17,10 +17,10 @@ To utilize the Chatgpt Long Term Memory package in your projects, follow the ste
     ```
     pip install chatgpt_long_term_memory
     ```
-    2. Sign up and obtain your API key from [here](https://platform.openai.com/overview).
-    3. Set OpenAI key in your env to access the ChatGPT service programmatically:
+    2. Sign up and obtain your API kEY from [here](https://platform.openai.com/overview).
+    3. Set OpenAI kEY in your env to access the ChatGPT service programmatically:
     ```
-    export OPENAI_API_KEY=sk-******
+    export OPENAI_API_kEY=sk-******
     ```
     4. Customize the configuration and parameters to suit your project's needs.
 
