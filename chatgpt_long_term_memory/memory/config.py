@@ -1,6 +1,6 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class ChatMemoryConfig(BaseModel):
-    redis_host: str = "172.16.0.2"
-    redis_port: int = 6379
+    redis_host: str = Field(default="172.16.0.2")
+    redis_port: int = Field(default=6379)

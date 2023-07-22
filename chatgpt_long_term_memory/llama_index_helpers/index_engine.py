@@ -34,26 +34,28 @@ class DocIndexer:
     """
 
     def __init__(
-            self, config: IndexConfig):
-        self.knowledge_base = config.knowledge_base
+            self, doc_config: IndexConfig, **kw):
+        super().__init__(**kw)
+        self.config = doc_config
 
         # Initialize the OpenAI language model
-        self.llm = OpenAI(model=config.model_name,
-                          temperature=config.temperature)
+        self.llm = OpenAI(model=self.config.model_name,
+                          temperature=self.config.temperature)
         service_context = ServiceContext.from_defaults(llm=self.llm)
         set_global_service_context(service_context)
 
-        self.root_path = config.root_path
-        self.data_path = f'{self.root_path}/resources/data'
-        assert os.path.exists(
-            self.data_path), f"Path '{self.data_path}' does not exist!"
+        self.root_path = self.config.root_path
+        if self.config.knowledge_base:
+            self.data_path = f'{self.root_path}/resources/data'
+            assert os.path.exists(
+                self.data_path), f"Path '{self.data_path}' does not exist!"
 
         # Define prompt helper for the index
         self.prompt_helper = PromptHelper(
-            config.context_window,
-            config.num_outputs,
-            config.max_chunk_overlap,
-            chunk_size_limit=config.chunk_size_limit
+            self.config.context_window,
+            self.config.num_outputs,
+            self.config.max_chunk_overlap,
+            chunk_size_limit=self.config.chunk_size_limit
         )
 
     def load_documents(self, retrieved_documents):
@@ -70,7 +72,7 @@ class DocIndexer:
         sorted_data = sorted(retrieved_documents,
                              key=lambda x: list(x.keys())[0], reverse=True)
         doc = list(sorted_data[0].values())[0]
-        doc = f"question: {doc['user_query']}, answer: {doc['bot_response']}"
+        doc = f"USER: {doc['user_query']}, ANSWER: {doc['bot_response']}"
         return Document(text=doc, doc_id=f"doc_id_{str(uuid.uuid4())}")
 
     def construct_index_general(self, user_id, path, mode):
@@ -86,15 +88,18 @@ class DocIndexer:
             VectorStoreIndex: The constructed index.
         """
         # If the user's storage directory does not exist, create it.
+        print(self.config.knowledge_base)
+        print(path)
         if not os.path.exists(path):
             os.makedirs(path)
 
         # Load data from the directory for the user's personal knowledge base
         if mode == 'kb':
-            if self.knowledge_base:
+            if self.config.knowledge_base:
                 documents = SimpleDirectoryReader(self.data_path).load_data()
             else:
                 # User doesn't have any personal knowledge base
+                print("kb f")
                 documents = []
 
         # Create a Document structure for the user's input query and chatbot response
@@ -125,9 +130,11 @@ class DocIndexer:
         index_path = f'{self.root_path}/storages/storage_{user_id}'
         status = os.path.exists(f'{index_path}/vector_store.json')
         if status:
+            print("index_path: if ", index_path)
             index = load_index_from_storage(
                 StorageContext.from_defaults(persist_dir=index_path))
         else:
+            print("index_path: else", index_path)
             index = self.construct_index_general(
                 user_id, index_path, mode="kb")
         return index

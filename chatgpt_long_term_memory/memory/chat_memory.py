@@ -15,9 +15,11 @@ class ChatMemory:
 
     """
 
-    def __init__(self, config: ChatMemoryConfig):
+    def __init__(self, memory_config: ChatMemoryConfig, **kw):
+        super().__init__(**kw)
+        self.config = memory_config
         self.redis_db = RedisManager(
-            host=config.redis_host, port=config.redis_port)
+            host=self.config.redis_host, port=self.config.redis_port)
 
     def get(self, user_id):
         """

@@ -25,9 +25,11 @@ class Retrievers:
 
     """
 
-    def __init__(self, config: RetrieversConfig):
-        self.top_k = config.top_k
-        self.similarity_threshold = config.similarity_threshold
+    def __init__(self, retrieve_config: RetrieversConfig, **kw):
+        super().__init__(**kw)
+        self.config = retrieve_config
+        self.top_k = self.config.top_k
+        self.similarity_threshold = self.config.similarity_threshold
 
     def query(self, index, question):
         """
