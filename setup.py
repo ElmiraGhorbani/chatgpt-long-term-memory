@@ -18,7 +18,8 @@ setup(
     install_requires=[
         'redis-chatgpt>=0.1.2',
         'llama-index>=0.7.9',
-        'openai>=0.27.8'
+        'openai>=0.27.8',
+        'tiktoken>=0.4.0'
     ],
     project_urls=project_urls,
     long_description=long_description,
