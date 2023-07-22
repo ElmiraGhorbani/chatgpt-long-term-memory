@@ -10,13 +10,13 @@ from chatgpt_long_term_memory.memory.config import ChatMemoryConfig
 
 
 class ChatGPTClient(DocIndexer, Retrievers, ChatMemory):
-    def __init__(self,
-                 doc_indexer_config: IndexConfig,
-                 chat_memory_config: ChatMemoryConfig,
-                 retrievers_config: RetrieversConfig):
-        DocIndexer.__init__(self, config=doc_indexer_config)
-        Retrievers.__init__(self, config=chat_memory_config)
-        ChatMemory.__init__(self, config=retrievers_config)
+    def __init__(self, doc_indexer_config: IndexConfig,
+                 retrievers_config: RetrieversConfig,
+                 chat_memory_config: ChatMemoryConfig):
+
+        super().__init__(doc_config=doc_indexer_config, retrieve_config=retrievers_config, memory_config=chat_memory_config)
+
+
 
     def converse_callback(self, question: str, user_id: str, callback=None):
         """
@@ -58,7 +58,8 @@ class ChatGPTClient(DocIndexer, Retrievers, ChatMemory):
             index: The updated index to be stored for the user.
         """
         # Update the index for the user
-        self.update_index(user_id, index)
+        retrieved_documents = self.get(user_id)
+        self.update_index(user_id, index, retrieved_documents)
 
     def converse(self, question: str, user_id: str):
         """
