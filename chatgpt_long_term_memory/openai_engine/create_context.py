@@ -43,9 +43,8 @@ class CreateContext:
         return chunks
 
     @retry_on_openai_errors(max_retry=3)
-    def summarize_memories(self, retrieved_nodes, tt_encoding):
+    def summarize_memories(self, memories, tt_encoding):
 
-        memories = ','.join(retrieved_nodes)
         chuncks = self.create_gpt_chunks(
             memories, tt_encoding)
         final_responses = []
