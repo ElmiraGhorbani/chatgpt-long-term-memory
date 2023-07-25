@@ -3,7 +3,6 @@ from pydantic import BaseModel, Field
 
 class OpenAIChatConfig(BaseModel):
     model_name: str = Field(default="gpt-4")
-    encoding_model: str = Field(default="cl100k_base")
     max_tokens: int = Field(default=1000)
     temperature: int = Field(default=0)
     top_p: int = Field(default=1)
@@ -27,3 +26,6 @@ class ContextConfig(OpenAIChatConfig):
     chunk_overlap = Field(default=0)
     max_summary_token = Field(default=256)
     summary_temperature = Field(default=0.7)
+
+class TokenCounterConfig(BaseModel):
+    encoding_model: str = Field(default="cl100k_base")
