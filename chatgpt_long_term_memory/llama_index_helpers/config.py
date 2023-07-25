@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 
 class IndexConfig(BaseModel):
     root_path: str = Field(
-        default="/home/elmira/projects/0-NAVIS/long-term-memory-chatbot")
+        default="")
     knowledge_base: bool = Field(default=True)
     model_name: str = Field(default="gpt-3.5-turbo")
     temperature: int = Field(default=0)
