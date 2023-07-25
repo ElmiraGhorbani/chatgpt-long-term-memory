@@ -58,7 +58,7 @@ docker run --name redis-db -d  --net mynet123 --ip 172.0.0.22 -p 6379:6379 -p 80
 ### Method 1: Utilizing Index Memory with Optional Knowledge Base
 You can leverage index memory by setting knowledge_base=True to incorporate your personalized data in the form of TXT files located within the directory: {your_root_path}/resources/data. Ensure the proper addressing of the resources/data directory for seamless access to the stored data.
 
-```
+```python
 # example/usage_index_memory.py
 
 from utils import get_project_root
@@ -156,7 +156,7 @@ while True:
 ### Method 2: Chat with GPT Models using Context Memory
 In this scenario, you can't use your own database, but you can interact with the GPT models and use context memory.
 
-```
+```python
 # example/usage_context_memory.py
 
 from utils import get_project_root
