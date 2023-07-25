@@ -2,7 +2,8 @@ from pydantic import BaseModel, Field
 
 
 class IndexConfig(BaseModel):
-    root_path: str = Field(default="/home/elmira/projects/0-NAVIS/long-term-memory-chatbot")
+    root_path: str = Field(
+        default="/home/elmira/projects/0-NAVIS/long-term-memory-chatbot")
     knowledge_base: bool = Field(default=True)
     model_name: str = Field(default="gpt-3.5-turbo")
     temperature: int = Field(default=0)
@@ -14,4 +15,4 @@ class IndexConfig(BaseModel):
 
 class RetrieversConfig(BaseModel):
     top_k: int = Field(default=7)
-    similarity_threshold: float = Field(default=0.7)
+    max_tokens: int = Field(default=1000)
