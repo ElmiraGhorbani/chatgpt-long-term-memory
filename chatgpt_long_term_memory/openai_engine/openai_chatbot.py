@@ -53,7 +53,7 @@ class OpenAIChatBot:
             'gpt-3.5-turbo-16k': 16384
         }
 
-    # @retry_on_openai_errors(max_retry=3)
+    @retry_on_openai_errors(max_retry=3)
     def chat(self, user_input, chat_history=[]):
         """
         This function serves as a wrapper for the OpenAI API, allowing the chatbot to generate a response to a user's query.
@@ -73,7 +73,7 @@ class OpenAIChatBot:
         7. The API returns a response that contains the generated message from the language model.
         8. The chatbot extracts the assistant's response from the API response and returns it as the final output.
         """
-        
+
         if chat_history:
             history = "\n".join(chat_history)
         else:
