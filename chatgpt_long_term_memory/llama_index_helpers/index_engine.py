@@ -88,8 +88,6 @@ class DocIndexer:
             VectorStoreIndex: The constructed index.
         """
         # If the user's storage directory does not exist, create it.
-        print(self.config.knowledge_base)
-        print(path)
         if not os.path.exists(path):
             os.makedirs(path)
 
@@ -99,7 +97,6 @@ class DocIndexer:
                 documents = SimpleDirectoryReader(self.data_path).load_data()
             else:
                 # User doesn't have any personal knowledge base
-                print("kb f")
                 documents = []
 
         # Create a Document structure for the user's input query and chatbot response
@@ -130,11 +127,9 @@ class DocIndexer:
         index_path = f'{self.root_path}/storages/storage_{user_id}'
         status = os.path.exists(f'{index_path}/vector_store.json')
         if status:
-            print("index_path: if ", index_path)
             index = load_index_from_storage(
                 StorageContext.from_defaults(persist_dir=index_path))
         else:
-            print("index_path: else", index_path)
             index = self.construct_index_general(
                 user_id, index_path, mode="kb")
         return index
