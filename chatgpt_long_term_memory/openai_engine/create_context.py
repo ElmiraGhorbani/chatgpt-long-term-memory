@@ -8,7 +8,7 @@ from chatgpt_long_term_memory.openai_engine.error_handler import \
 
 # Set the OpenAI API kEY using the environment variable or a default kEY
 KEY = os.getenv("OPENAI_API_KEY",
-                "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")
+                "")
 openai.api_key = KEY
 os.environ["OPENAI_API_KEY"] = KEY
 
