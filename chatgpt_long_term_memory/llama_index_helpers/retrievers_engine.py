@@ -10,7 +10,7 @@ from chatgpt_long_term_memory.openai_engine.config import TokenCounterConfig
 from chatgpt_long_term_memory.openai_engine.token_counter import TokenCounter
 
 KEY = os.getenv("OPENAI_API_KEY",
-                "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")
+                "")
 
 openai.api_kEY = KEY
 os.environ["OPENAI_API_KEY"] = KEY
