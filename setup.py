@@ -12,8 +12,7 @@ setup(
     name='chatgpt_long_term_memory',
     version='0.1.0',
     author='Elmira Ghorbani',
-    description='Empower your projects with a large knowledge base and adaptive memory using Chatgpt Long Term Memory.',
-    long_description='The Chatgpt Long Term Memory package is designed to empower your projects by accommodating a large number of simultaneous users while leveraging an extensive knowledge base and adaptive memory. This capability is made possible through the integration of cutting-edge technologies, including GPT (OpenAI), llama vector index, and Redis datastore.',
+    description='The ChatGPT Long Term Memory package is a powerful tool designed to empower your projects with the ability to handle a large number of simultaneous users. It achieves this by seamlessly integrating an extensive knowledge base and adaptive memory through cutting-edge technologies such as GPT from OpenAI, llama vector index, and Redis datastore. With this comprehensive set of capabilities, you can create highly scalable applications that provide contextually relevant and engaging conversations, enhancing the overall user experience and interaction.',
     packages=find_packages(),
     install_requires=[
         'redis-chatgpt>=0.1.2',
