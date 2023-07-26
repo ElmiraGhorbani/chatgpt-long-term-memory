@@ -32,21 +32,21 @@ The combination of these key features makes the ChatGPT Long Term Memory package
 
 To utilize the Chatgpt Long Term Memory package in your projects, follow the steps below:
 
-    1. Install the package
-    ```
-    pip install chatgpt_long_term_memory
-    ```
-    2. Sign up and obtain your API kEY from [here](https://platform.openai.com/overview).
-    3. Set OpenAI kEY in your env to access the ChatGPT service programmatically:
-    ```
-    export OPENAI_API_kEY=sk-******
-    ```
-    4. Customize the configuration and parameters to suit your project's needs.
+1. Install the package
+```console
+pip install chatgpt_long_term_memory
+```
+2. Sign up and obtain your API kEY from [here](https://platform.openai.com/overview).
+3. Set OpenAI kEY in your env to access the ChatGPT service programmatically:
+```console
+export OPENAI_API_kEY=sk-******
+```
+4. Customize the configuration and parameters to suit your project's needs.
 
 # Example Usage:
 
 pull redis docker image and run:
-```
+```console
 docker pull redis
 
 docker network create --subnet=172.0.0.0/16 mynet123
